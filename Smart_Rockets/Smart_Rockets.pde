@@ -1,7 +1,7 @@
-int popSize = 400;
+int popSize = 1000;
 Rocket population[] = new Rocket[popSize];
 int lifeSpan = 250;
-float mutationRate = 0.025;
+float mutationRate = 0.02;
 ArrayList<Rocket> matingPool = new ArrayList<Rocket>();
 
 float time = 0;
@@ -18,10 +18,13 @@ void setup() {
       for (int i = 0; i < popSize; i++) {
             population[i] = new Rocket();
       }
-      target = new PVector(width / 2, 100);
+      target = new PVector(width / 2, height / 4);
       noStroke();
       fill(255, 150);
       frameRate(60);
+      time = 0;
+      generation = 0;
+      maxFit = 0;
 }
 
 
@@ -101,4 +104,15 @@ void mousePressed() {
 void mouseReleased() {
 
       obstacles.get(obstacles.size() - 1).drawing = false;
+}
+
+
+void keyPressed() {
+  
+ if (key == 'n') {
+   
+  setup();
+   
+ }
+  
 }

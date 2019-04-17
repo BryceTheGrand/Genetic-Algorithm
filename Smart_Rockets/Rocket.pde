@@ -43,6 +43,7 @@ class Rocket {
             } else
                   fill(200, 150);
             rotate(vel.heading());
+            stroke(0, 100);
             rectMode(CENTER);
             rect(0, 0, 15, 5);
 
@@ -52,7 +53,7 @@ class Rocket {
 
       void calcFitness() {
 
-            fitness = 300 / (distance(pos.x, pos.y, target.x, target.y) + (time / 3));
+            fitness = 300 / (distance(pos.x, pos.y, target.x, target.y) + (time / 6));
       }
 
 
