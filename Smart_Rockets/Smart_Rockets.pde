@@ -1,7 +1,7 @@
-int popSize = 100;
+int popSize = 400;
 Rocket population[] = new Rocket[popSize];
-int lifeSpan = 400;
-float mutationRate = 0.015;
+int lifeSpan = 250;
+float mutationRate = 0.025;
 ArrayList<Rocket> matingPool = new ArrayList<Rocket>();
 
 float time = 0;
@@ -14,14 +14,14 @@ ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
 
 
 void setup() {
-      size(800, 800);
+      size(800, 800, P3D);
       for (int i = 0; i < popSize; i++) {
             population[i] = new Rocket();
       }
       target = new PVector(width / 2, 100);
       noStroke();
       fill(255, 150);
-      frameRate(30);
+      frameRate(60);
 }
 
 

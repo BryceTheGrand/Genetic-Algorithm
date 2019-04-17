@@ -33,11 +33,15 @@ class Rocket {
 
             push();
 
-            if (fitness > maxFit)
-                  fill(200, 0, 255, 255);
-            else
-                  fill(200, 150);
             translate(pos.x, pos.y);
+            if (fitness >= maxFit) {
+                  noFill();
+                  stroke(255);
+                  circle(0, 0, 30);
+                  fill(200, 0, 255, 255);
+                  noStroke();
+            } else
+                  fill(200, 150);
             rotate(vel.heading());
             rectMode(CENTER);
             rect(0, 0, 15, 5);
