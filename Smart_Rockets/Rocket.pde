@@ -38,14 +38,15 @@ class Rocket {
                   noFill();
                   stroke(255);
                   circle(0, 0, 30);
-                  fill(200, 0, 255, 255);
-                  noStroke();
-            } else
-                  fill(200, 150);
-            rotate(vel.heading());
-            stroke(0, 100);
-            rectMode(CENTER);
-            rect(0, 0, 15, 5);
+                  rotate(vel.heading());
+                  shape(smartRocket, 0, 0);
+            } else {
+                  if (!hide) {
+                        rotate(vel.heading());
+
+                        shape(rocket, 0, 0);
+                  }
+            }
 
             pop();
       }

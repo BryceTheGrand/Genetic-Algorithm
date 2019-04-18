@@ -1,7 +1,7 @@
-int popSize = 1000;
+int popSize = 2500;
 Rocket population[] = new Rocket[popSize];
-int lifeSpan = 250;
-float mutationRate = 0.02;
+int lifeSpan = 400;
+float mutationRate = 0.03;
 ArrayList<Rocket> matingPool = new ArrayList<Rocket>();
 
 float time = 0;
@@ -9,8 +9,17 @@ PVector target;
 float targetRad = 40;
 float maxFit = 0;
 int generation = 0;
+float framerate = 60;
+
+PShape rocket = new PShape();
+PShape smartRocket = new PShape();
+
+
+boolean hide = false;
 
 ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
+
+String info = new String();
 
 
 void setup() {
@@ -21,10 +30,28 @@ void setup() {
       target = new PVector(width / 2, height / 4);
       noStroke();
       fill(255, 150);
-      frameRate(60);
+      frameRate(framerate);
       time = 0;
       generation = 0;
       maxFit = 0;
+
+      rocket = createShape();
+      rocket.beginShape();
+      rocket.fill(255, 150);
+      rocket.vertex(-5, 3);
+      rocket.vertex(-5, -3);
+      rocket.vertex(10, 0);
+      rocket.endShape(CLOSE);
+      
+      smartRocket = createShape();
+      smartRocket.beginShape();
+      smartRocket.fill(100, 0, 255, 150);
+      smartRocket.vertex(-5, 3);
+      smartRocket.vertex(-5, -3);
+      smartRocket.vertex(10, 0);
+      smartRocket.endShape(CLOSE);
+      
+      info = "Genetic Smart Rocket Program\nKeybindings:\n'c': Clear obstacles\n'n': New population (restart from random)\n'h': Hide all but most fit rocket\nUP/DOWN key: Increase/Decrease sim speed\n\nClick and drag to create obstacles (must drag from top-left to bottom-right)";
 }
 
 
@@ -79,9 +106,10 @@ void draw() {
       }
 
       String stats = "";
-      stats += "Maximum fitness: " + maxFit + "\nGeneration: " + generation + "\nPopulation: " + popSize + "\nLifetime: " + time;
+      stats += "Maximum fitness: " + maxFit + "\nGeneration: " + generation + "\nPopulation: " + popSize + "\nLifetime: " + time + "\nHide: " + hide + "\nObstacles: " + obstacles.size() + "\nFramerate: " + framerate;
 
-      text(stats, width - 200, height - 100);
+      text(stats, 5, 15);
+      text(info, 5, height - 105);
 }
 
 
@@ -108,11 +136,34 @@ void mouseReleased() {
 
 
 void keyPressed() {
-  
- if (key == 'n') {
-   
-  setup();
-   
- }
-  
+
+      if (key == 'n') {
+
+            setup();
+      }
+      if (key == 'c') {
+
+            for (int i = 0; i < obstacles.size(); i++) {
+
+                  obstacles.remove(i);
+                  i--;
+            }
+      }
+      if (key == 'h') {
+
+            if (hide) {
+                  hide = false;
+            } else {
+
+                  hide = true;
+            }
+      }
+      if (keyCode == UP) {
+            framerate += 10;
+            frameRate(framerate);
+      }
+      if (keyCode == DOWN) {
+            framerate -= 10;
+            frameRate(framerate);
+      }
 }

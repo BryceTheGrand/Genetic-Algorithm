@@ -17,7 +17,7 @@ class Obstacle {
                   pos2.set(mouseX, mouseY);
             }
             rectMode(CORNERS);
-            fill(200, 0, 0, 255);
+            fill(255, 255);
             rect(pos1.x, pos1.y, pos2.x, pos2.y);
             fill(255, 150);
       }
